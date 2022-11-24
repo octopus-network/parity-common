@@ -104,6 +104,18 @@ impl std::error::Error for FromStrRadixErr {
 	}
 }
 
+#[cfg(not(feature = "std"))]
+impl core::error::Error for FromStrRadixErr {
+	fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
+		match self.source {
+			Some(FromStrRadixErrSrc::Dec(ref d)) => Some(d),
+			Some(FromStrRadixErrSrc::Hex(ref h)) => Some(h),
+			None => None,
+		}
+	}
+}
+
+
 impl From<FromDecStrErr> for FromStrRadixErr {
 	fn from(e: FromDecStrErr) -> Self {
 		let kind = match e {
@@ -152,6 +164,9 @@ impl fmt::Display for FromDecStrErr {
 #[cfg(feature = "std")]
 impl std::error::Error for FromDecStrErr {}
 
+#[cfg(not(feature = "std"))]
+impl core::error::Error for FromDecStrErr {}
+
 #[derive(Debug)]
 pub struct FromHexError {
 	inner: hex::FromHexError,
@@ -166,6 +181,13 @@ impl fmt::Display for FromHexError {
 #[cfg(feature = "std")]
 impl std::error::Error for FromHexError {
 	fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+		Some(&self.inner)
+	}
+}
+
+#[cfg(not(feature = "std"))]
+impl core::error::Error for FromHexError {
+	fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
 		Some(&self.inner)
 	}
 }

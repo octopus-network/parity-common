@@ -44,6 +44,13 @@ impl StdError for DecoderError {
 	}
 }
 
+#[cfg(not(feature = "std"))]
+impl core::error::Error for DecoderError {
+	fn description(&self) -> &str {
+		"builder error"
+	}
+}
+
 impl fmt::Display for DecoderError {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		fmt::Debug::fmt(&self, f)

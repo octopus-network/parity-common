@@ -99,6 +99,9 @@ impl std::fmt::Display for MemoryStatsError {
 #[cfg(feature = "std")]
 impl std::error::Error for MemoryStatsError {}
 
+#[cfg(not(feature = "std"))]
+impl core::error::Error for MemoryStatsError {}
+
 /// Snapshot of collected memory metrics.
 #[non_exhaustive]
 #[derive(Debug, Clone)]
