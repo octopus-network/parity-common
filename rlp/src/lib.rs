@@ -33,6 +33,7 @@
 //! * You don't want to decode whole rlp at once.
 
 #![cfg_attr(not(feature = "std"), no_std)]
+#![feature(error_in_core)]
 
 #[cfg(not(feature = "std"))]
 extern crate alloc;

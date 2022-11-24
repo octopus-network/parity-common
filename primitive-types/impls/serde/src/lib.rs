@@ -9,6 +9,7 @@
 //! Serde serialization support for uint and fixed hash.
 
 #![no_std]
+#![feature(error_in_core)]
 
 #[macro_use]
 extern crate alloc;
