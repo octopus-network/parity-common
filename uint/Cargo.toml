@@ -14,7 +14,7 @@ rust-version = "1.56.1"
 byteorder = { version = "1.4.2", default-features = false }
 crunchy = { version = "0.2.2", default-features = false }
 quickcheck = { version = "1", optional = true }
-hex = { version = "0.4", default-features = false }
+hex = { version = "0.4", default-features = false, git = "https://github.com/octopus-network/rust-hex.git", branch = "add-core-error" }
 static_assertions = "1.0.0"
 arbitrary = { version = "1.0", optional = true }
 
